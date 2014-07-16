@@ -1,6 +1,54 @@
-<%= title "My Profile" %>
+<%= title "Account Setting" %>
 
-<%= render 'form' %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <fieldset><!-- this creates a border around the group inside -->
+  	
+  	<legend>About you</legend> <!-- will be text on the border -->
+    
+    <%= f.label :first_name, "First Name" %>
+    <%= f.text_field :first_name %>
+  
+    <%= f.label :last_name, "Last Name" %>
+    <%= f.text_field :last_name %>
+  
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  
+  </fieldset>
+
+
+  <fieldset><!-- this creates a border around the group inside -->
+  	
+  <legend>Change Password</legend> 
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+    <%= f.label :password_confirmation, "Password (again)" %>
+    <%= f.password_field :password_confirmation %>
+	</fieldset>
+
+	<div class="row">
+  	<div class="small-12 columns">
+  		<%= f.submit "Save", class: "button radius expand" %>
+		</div><!-- end of columns -->
+	</div><!-- end of row -->
+
+<% end %>
+
+
+<!-- < render form > -->
+<!-- render 'form' is how you know that this is rending a partial - Form is here! -->
+<!-- form this is rending is _form.html.erb (the _underscore means partial) -->
+<!-- we took this out so that we can have different forms -->
+
